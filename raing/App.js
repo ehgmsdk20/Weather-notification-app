@@ -6,9 +6,11 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import messaging from '@react-native-firebase/messaging';
 import type {Node} from 'react';
 import {
+  Alert,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -58,6 +60,14 @@ const App: () => Node = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+
+    return unsubscribe;
+   }, []);
 
   return (
     <SafeAreaView style={backgroundStyle}>

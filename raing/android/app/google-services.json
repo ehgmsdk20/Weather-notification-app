@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "510918682626",
+    "project_id": "raing-34a0b",
+    "storage_bucket": "raing-34a0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510918682626:android:4c2563dc4ed8c1339f9f1b",
+        "android_client_info": {
+          "package_name": "com.raing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "510918682626-j1ulvd9p41vt1o0gl16br4bc803on9oi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.raing",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "510918682626-sd4s7dtrvci11rsj4nkd0l9t1pdetena.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfekh-Bc7EIgoVN2AN0j8b4heoTc85mr4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "510918682626-sd4s7dtrvci11rsj4nkd0l9t1pdetena.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
