@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import messaging from '@react-native-firebase/messaging';
 import type {Node} from 'react';
 import {
@@ -27,6 +27,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import NotiDialog from './src/components/dialog/NotiDialog';
 
 const Section = ({children, title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -56,6 +57,8 @@ const Section = ({children, title}): Node => {
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
+  const [modalVisible, setModalVisible] = useState(true);
+  const [message, setMessage] = useState('');
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -63,9 +66,10 @@ const App: () => Node = () => {
 
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+      setModalVisible(true);
+      setMessage(JSON.stringify(remoteMessage));
+      console.log("received");
     });
-
     return unsubscribe;
    }, []);
 
@@ -94,6 +98,11 @@ const App: () => Node = () => {
             Read the docs to discover what to do next:
           </Section>
           <LearnMoreLinks />
+          <NotiDialog
+            setModalVisible = {setModalVisible}
+            modalVisible = {modalVisible}
+            content = {message}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
