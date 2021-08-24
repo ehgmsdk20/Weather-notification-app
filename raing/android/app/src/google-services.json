@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "664505521442",
+    "project_id": "raing-caaf1",
+    "storage_bucket": "raing-caaf1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664505521442:android:b459e015de5c6fe743417b",
+        "android_client_info": {
+          "package_name": "com.raing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664505521442-5uiqg7a6vr2lvukap15hqtj7705j39i0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.raing",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "664505521442-aro858doqp9fnbb8lv7bn0hhous7mpne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb0fxo9xXkOUorpTRN021s5vD_F4MFmc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664505521442-aro858doqp9fnbb8lv7bn0hhous7mpne.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "664505521442-k1qbgl90errb1qgv9r9fbpulp09nrq3j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.Raing"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
