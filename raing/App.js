@@ -3,110 +3,193 @@
  * https://github.com/facebook/react-native
  *
  * @format
- * @flow strict-local
+ * @flow
  */
 
-import React from 'react';
-
+import React, {Component} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
+  TextInput,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
+  TouchableOpacity,
+  Alert,
 } from 'react-native';
+import NotifService from './NotifService';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
 
-const Section = ({children, title}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+    this.notif = new NotifService(
+      this.onRegister.bind(this),
+      this.onNotif.bind(this),
+    );
+  }
 
-const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>
+          Example app react-native-push-notification
+        </Text>
+        <View style={styles.spacer}></View>
+        <TextInput
+          style={styles.textField}
+          value={this.state.registerToken}
+          placeholder="Register token"
+        />
+        <View style={styles.spacer}></View>
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.notif.localNotif();
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
+          <Text>Local Notification (now)</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.notif.localNotif('sample.mp3');
+          }}>
+          <Text>Local Notification with sound (now)</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.notif.scheduleNotif();
+          }}>
+          <Text>Schedule Notification in 30s</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.notif.scheduleNotif('sample.mp3');
+          }}>
+          <Text>Schedule Notification with sound in 30s</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.notif.cancelNotif();
+          }}>
+          <Text>Cancel last notification (if any)</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.notif.cancelAll();
+          }}>
+          <Text>Cancel all notifications</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.notif.checkPermission(this.handlePerm.bind(this));
+          }}>
+          <Text>Check Permission</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.notif.requestPermissions();
+          }}>
+          <Text>Request Permissions</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.notif.abandonPermissions();
+          }}>
+          <Text>Abandon Permissions</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.notif.getScheduledLocalNotifications(notifs => console.log(notifs));
+          }}>
+          <Text>Console.Log Scheduled Local Notifications</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.notif.getDeliveredNotifications(notifs => console.log(notifs));
+          }}>
+          <Text>Console.Log Delivered Notifications</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.notif.createOrUpdateChannel();
+          }}>
+          <Text>Create or update a channel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.notif.popInitialNotification();
+          }}>
+          <Text>popInitialNotification</Text>
+        </TouchableOpacity>
+
+        <View style={styles.spacer}></View>
+
+        {this.state.fcmRegistered && <Text>FCM Configured !</Text>}
+
+        <View style={styles.spacer}></View>
+      </View>
+    );
+  }
+
+  onRegister(token) {
+    this.setState({registerToken: token.token, fcmRegistered: true});
+  }
+
+  onNotif(notif) {
+    Alert.alert(notif.title, notif.message);
+  }
+
+  handlePerm(perms) {
+    Alert.alert('Permissions', JSON.stringify(perms));
+  }
+}
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  button: {
+    borderWidth: 1,
+    borderColor: '#000000',
+    margin: 5,
+    padding: 5,
+    width: '70%',
+    backgroundColor: '#DDDDDD',
+    borderRadius: 5,
   },
-  highlight: {
-    fontWeight: '700',
+  textField: {
+    borderWidth: 1,
+    borderColor: '#AAAAAA',
+    margin: 5,
+    padding: 5,
+    width: '70%',
+  },
+  spacer: {
+    height: 10,
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    textAlign: 'center',
   },
 });
-
-export default App;
