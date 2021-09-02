@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "599620541906",
+    "project_id": "raing-a01ed",
+    "storage_bucket": "raing-a01ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599620541906:android:eb8c0af29046ff31e23c0b",
+        "android_client_info": {
+          "package_name": "com.raing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599620541906-g9naim0i5lkg9j7eiu7rl4ohs2k8t2bn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4ffNlZQ9sgWlolJcO2kSeXQfmYdISAsE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599620541906-g9naim0i5lkg9j7eiu7rl4ohs2k8t2bn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "599620541906-8lo687b7dpe7iimtm61h9j5lvc3navfb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.Raing"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
