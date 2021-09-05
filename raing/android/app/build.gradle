@@ -190,6 +190,7 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(':react-native-push-notification')
     implementation project(':react-native-headless-work-manager')
+    implementation project(':react-native-background-actions')
 
     // firebase
     implementation platform('com.google.firebase:firebase-bom:28.4.0')
